@@ -11,11 +11,8 @@ function updateUsernamePreview(){const username=makeUsername(form.elements.usern
 function encodeProfileData(profile){const bytes=new TextEncoder().encode(JSON.stringify(profile));let binary='';for(const byte of bytes)binary+=String.fromCharCode(byte);return btoa(binary).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
 function decodeProfileData(value){try{const base64=value.replace(/-/g,'+').replace(/_/g,'/');const binary=atob(base64.padEnd(Math.ceil(base64.length/4)*4,'='));const bytes=Uint8Array.from(binary,char=>char.charCodeAt(0));return JSON.parse(new TextDecoder().decode(bytes))}catch{return null}}
 function createProfileLink(profile){
-  const username=profileUsername(profile),shared={name:profile.name,username,role:profile.role,location:profile.location||'',bio:profile.bio||'',skills:Array.isArray(profile.skills)?profile.skills:[],github:profile.github||'',website:profile.website||'',photo:profile.photo||''};
-  const url=new URL(location.href);url.search=new URLSearchParams({user:username}).toString();url.hash=`profile=${encodeProfileData(shared)}`;
-  let photoIncluded=Boolean(shared.photo);
-  if(url.href.length>8000&&photoIncluded){shared.photo='';url.hash=`profile=${encodeProfileData(shared)}`;photoIncluded=false}
-  return{url:url.href,photoIncluded}
+  const url=new URL(location.href);url.search=new URLSearchParams({user:profileUsername(profile)}).toString();url.hash='';
+  return{url:url.href,photoIncluded:true}
 }
 async function copyText(text){
   if(navigator.clipboard?.writeText){try{await navigator.clipboard.writeText(text);return}catch{}}
@@ -28,7 +25,7 @@ window.copyProfileLink=async(id,button)=>{
   try{await copyText(link.url);showCopied(button,link.photoIncluded)}catch{alert('Link copy nahi ho paya. Browser clipboard permission check karein.')}
 };
 window.copySharedProfileLink=async(button)=>{
-  const profile=decodeProfileData(new URLSearchParams(location.hash.slice(1)).get('profile')||'');if(!profile)return;
+  const username=new URLSearchParams(location.search).get('user'),profile=getAll().find(item=>profileUsername(item)===username)||decodeProfileData(new URLSearchParams(location.hash.slice(1)).get('profile')||'');if(!profile)return;
   const link=createProfileLink(profile);
   try{await copyText(link.url);showCopied(button,link.photoIncluded)}catch{alert('Link copy nahi ho paya. Browser clipboard permission check karein.')}
 };
@@ -85,7 +82,7 @@ function render(q=''){
     </div>`).join('');
 }
 function renderSharedProfile(username){
-  const section=$('sharedProfile'),encoded=new URLSearchParams(location.hash.slice(1)).get('profile'),profile=encoded?decodeProfileData(encoded):null;
+  const section=$('sharedProfile'),encoded=new URLSearchParams(location.hash.slice(1)).get('profile'),profile=getAll().find(item=>profileUsername(item)===username)||(encoded?decodeProfileData(encoded):null);
   $('hero').hidden=true;$('create').hidden=true;$('profiles').hidden=true;document.querySelector('.seo').hidden=true;document.querySelector('.nav nav').hidden=true;section.hidden=false;
   if(!profile||profileUsername(profile)!==username){section.innerHTML='<h1>Profile link nahi mila</h1><p class="muted">Yeh link adhura ya invalid hai. Profile owner se naya link mangwayein.</p><a class="btn primary" href="'+esc(location.pathname)+'">Website par wapas jaayein</a>';return}
   const homeUrl=location.origin+location.pathname,externalUrl=value=>{try{const url=new URL(/^https?:\/\//i.test(value)?value:`https://${value}`);return['http:','https:'].includes(url.protocol)?url.href:''}catch{return''}};
