@@ -30,7 +30,7 @@ const projectSchema = new mongoose.Schema({
 const profileSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, unique: true, index: true },
   username: { type: String, required: true, unique: true, lowercase: true, trim: true, minlength: 3, maxlength: 30, match: /^[a-z0-9_-]+$/ },
-  profileImage: { type: String, trim: true, maxlength: 2048, default: '' },
+  profileImage: { type: String, trim: true, maxlength: 1_500_000, default: '' },
   fullName: { type: String, required: true, trim: true, minlength: 2, maxlength: 120 },
   professionalTitle: { type: String, trim: true, maxlength: 160, default: '' },
   location: { type: String, trim: true, maxlength: 180, default: '' },

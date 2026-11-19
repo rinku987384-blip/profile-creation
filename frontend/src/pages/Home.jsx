@@ -1,22 +1,28 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import RouteLayout from '../components/RouteLayout.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
+import PublicProfile from './PublicProfile.jsx'
 import { getPublicProfiles } from '../services/api.js'
 
 export default function Home() {
   const { user } = useAuth()
+  const [searchParams] = useSearchParams()
+  const profileUsername = searchParams.get('user')
   const [profiles, setProfiles] = useState([])
   const [search, setSearch] = useState('')
   const [unavailable, setUnavailable] = useState(false)
 
   useEffect(() => {
+    if (profileUsername) return undefined
     let active = true
     getPublicProfiles()
       .then(({ profiles: results }) => { if (active) setProfiles(results) })
       .catch(() => { if (active) setUnavailable(true) })
     return () => { active = false }
-  }, [])
+  }, [profileUsername])
+
+  if (profileUsername) return <PublicProfile username={profileUsername} />
 
   const filteredProfiles = profiles.filter((profile) => {
     const content = `${profile.fullName} ${profile.professionalTitle} ${profile.location} ${profile.skills?.join(' ')}`.toLowerCase()

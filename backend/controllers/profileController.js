@@ -72,6 +72,6 @@ export async function getPublicProfile(req, res) {
 
 export async function uploadProfileImage(req, res) {
   if (!req.file) return res.status(400).json({ error: 'Choose an image file to upload.' })
-  res.status(201).json({ imageUrl: `/uploads/${req.file.filename}` })
+  const imageUrl = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`
+  res.status(201).json({ imageUrl })
 }
-

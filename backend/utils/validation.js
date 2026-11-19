@@ -39,7 +39,7 @@ export const loginSchema = z.object({
 
 export const profileSchema = z.object({
   username: z.string().trim().toLowerCase().regex(/^[a-z0-9_-]{3,30}$/),
-  profileImage: text(2048),
+  profileImage: text(1_500_000),
   fullName: z.string().trim().min(2).max(120),
   professionalTitle: text(160), location: text(180), shortBio: text(280), about: text(10000),
   experience: z.array(experience).max(30).default([]),

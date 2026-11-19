@@ -14,7 +14,9 @@ import sanitizeInput from './middleware/sanitizeInput.js'
 
 const app = express()
 const port = Number(process.env.PORT || 4000)
-const allowedOrigins = (process.env.CLIENT_URL || 'http://127.0.0.1:5173').split(',').map((url) => url.trim())
+const configuredOrigins = process.env.CLIENT_URL || (process.env.NODE_ENV === 'production' ? '' : 'http://127.0.0.1:5173')
+const allowedOrigins = [...configuredOrigins.split(','), process.env.RENDER_EXTERNAL_URL || ''].map((url) => url.trim()).filter(Boolean)
+const frontendDirectory = path.resolve(process.cwd(), '../frontend/dist')
 
 app.use(helmet())
 app.use(cors({ origin: (origin, callback) => {
@@ -31,6 +33,13 @@ app.get('/api/health', (_req, res) => res.json({ ok: true, database: mongoose.co
 app.use('/api/auth', authRoutes)
 app.use('/api/profiles', profileRoutes)
 app.use('/api/admin', adminRoutes)
+app.use(express.static(frontendDirectory, { index: false, maxAge: process.env.NODE_ENV === 'production' ? '1h' : 0 }))
+app.use((req, res, next) => {
+  if (req.method !== 'GET' || req.path.startsWith('/api/')) return next()
+  res.sendFile(path.join(frontendDirectory, 'index.html'), (error) => {
+    if (error) next(error)
+  })
+})
 
 app.use((error, _req, res, _next) => {
   if (error.code === 11000) return res.status(409).json({ error: 'That email or username is already in use.' })

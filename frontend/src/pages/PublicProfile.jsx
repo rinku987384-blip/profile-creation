@@ -3,8 +3,9 @@ import { Link, useParams } from 'react-router-dom'
 import RouteLayout from '../components/RouteLayout.jsx'
 import { getPublicProfile } from '../services/api.js'
 
-export default function PublicProfile() {
-  const { username } = useParams()
+export default function PublicProfile({ username: requestedUsername }) {
+  const { username: routeUsername } = useParams()
+  const username = requestedUsername || routeUsername
   const [profile, setProfile] = useState(null)
   const [error, setError] = useState('')
   const [copied, setCopied] = useState(false)
