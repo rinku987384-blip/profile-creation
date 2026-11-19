@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile Creation — Free Online Profile Maker</title>
+  <meta name="description" content="Profile Creation — free me apna online profile banao, photo, bio, skills aur social links ke saath. Google me searchable personal profile page." />
+  <meta name="keywords" content="profile creation, online profile maker, free profile website, personal profile page India" />
+  <meta name="author" content="Profile Creation" />
+  <meta property="og:title" content="Profile Creation — Free Online Profile Maker" />
+  <meta property="og:description" content="Free me apna sundar online profile banao aur share karo." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👤</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-in">
+      <a class="brand" href="index.html">👤 Profile<span>Creation</span></a>
+      <nav>
+        <a href="#create">Create</a>
+        <a href="#profiles">Profiles</a>
+        <a href="guide.html">Deploy Guide</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <h1>Free me apna <span class="hl">Online Profile</span> banao</h1>
+        <p>Naam, photo, bio, skills, social links — sab kuch ek sundar page me. Bina login, bina paisa. Data aapke browser me safe rehta hai.</p>
+        <div class="cta">
+          <a href="#create" class="btn primary">+ Naya Profile Banao</a>
+          <a href="#profiles" class="btn ghost">Profiles Dekho</a>
+        </div>
+        <ul class="ticks">
+          <li>✓ GitHub Pages par 100% free hosting</li>
+          <li>✓ Mobile friendly + SEO ready</li>
+          <li>✓ Google me searchable ban sakta hai</li>
+        </ul>
+      </div>
+      <div class="hero-card" id="heroPreview">
+        <div class="pc-head"></div>
+        <div class="avatar">R</div>
+        <h3>Rinku Sharma</h3>
+        <p class="role">Web Developer • India</p>
+        <div class="chips"><span>HTML</span><span>CSS</span><span>React</span></div>
+        <div class="row"><span class="btn small primary">Follow</span><span class="btn small ghost">Share</span></div>
+      </div>
+    </section>
+
+    <section id="create" class="card">
+      <h2>1. Apna profile banao</h2>
+      <p class="muted">Form bharo → Live preview dekho → Save dabao. Profile neeche list me jud jayega.</p>
+      <div class="grid2">
+        <form id="pform">
+          <label>Poora naam *<input name="name" required placeholder="e.g. Rinku Sharma" maxlength="60" /></label>
+          <label>Role / Kaam *<input name="role" required placeholder="e.g. Web Developer" maxlength="80" /></label>
+          <label>Location<input name="location" placeholder="e.g. Jaipur, India" maxlength="60" /></label>
+          <label>Photo (optional)<input type="file" name="photo" accept="image/*" /></label>
+          <label>Bio<textarea name="bio" rows="3" placeholder="Apne baare me 2-3 line likho..." maxlength="400"></textarea></label>
+          <label>Skills (comma se alag karo)<input name="skills" placeholder="HTML, CSS, JavaScript" maxlength="150" /></label>
+          <div class="grid2">
+            <label>GitHub<input name="github" placeholder="https://github.com/..." /></label>
+            <label>LinkedIn / Website<input name="website" placeholder="https://..." /></label>
+          </div>
+          <div class="row">
+            <button class="btn primary" type="submit">💾 Profile Save Karo</button>
+            <button class="btn ghost" type="button" id="resetBtn">Clear</button>
+          </div>
+        </form>
+        <div>
+          <h3 class="muted">Live Preview</h3>
+          <div class="profile-card" id="preview">
+            <div class="pc-head"></div>
+            <img class="avatar-img" id="pvImg" style="display:none" alt="preview" />
+            <div class="avatar" id="pvAvatar">?</div>
+            <h3 id="pvName">Aapka Naam</h3>
+            <p class="role" id="pvRole">Aapka Role</p>
+            <p class="bio" id="pvBio">Yahan aapki bio dikhegi...</p>
+            <div class="chips" id="pvSkills"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="profiles" class="card">
+      <div class="sec-head">
+        <h2>2. Bane hue profiles</h2>
+        <div class="row">
+          <input id="search" placeholder="🔍 Search naam / skill..." />
+          <button class="btn ghost small" id="exportBtn">Export</button>
+        </div>
+      </div>
+      <div id="list" class="cards"></div>
+      <p class="muted" id="emptyMsg">Abhi koi profile nahi hai — upar form se pehla profile banao 👆</p>
+    </section>
+
+    <section class="card seo">
+      <h2>Profile Creation kya hai?</h2>
+      <p><strong>Profile Creation</strong> ek free online profile maker website hai. Isse student, freelancer, developer ya job seeker apna personal profile page bana sakte hain — photo, bio, skills aur social links ke saath — aur ek link ki tarah share kar sakte hain. Ye website GitHub Pages par free host hoti hai aur Google Search me index ho sakti hai.</p>
+    </section>
+  </main>
+
+  <footer><div class="wrap">© 2026 Profile Creation • Free • <a href="sitemap.xml">Sitemap</a> • <a href="robots.txt">Robots</a></div></footer>
+  <script src="app.js"></script>
+</body>
+</html>

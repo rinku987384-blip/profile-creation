@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rinku987384-blip.github.io/profile-creation/sitemap.xml
