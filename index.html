@@ -25,7 +25,7 @@
   </header>
 
   <main class="wrap">
-    <section class="hero">
+    <section class="hero" id="hero">
       <div>
         <h1>Free me apna <span class="hl">Online Profile</span> banao</h1>
         <p>Naam, photo, bio, skills, social links — sab kuch ek sundar page me. Bina login, bina paisa. Data aapke browser me safe rehta hai.</p>
@@ -49,12 +49,15 @@
       </div>
     </section>
 
+    <section id="sharedProfile" class="card shared-profile" hidden></section>
+
     <section id="create" class="card">
       <h2>1. Apna profile banao</h2>
       <p class="muted">Form bharo → Live preview dekho → Save dabao. Profile neeche list me jud jayega.</p>
       <div class="grid2">
         <form id="pform">
           <label>Poora naam *<input name="name" required placeholder="e.g. Rinku Sharma" maxlength="60" /></label>
+          <label>Username *<input name="username" required pattern="[A-Za-z0-9\u002D]{3,30}" minlength="3" maxlength="30" placeholder="rinku-sharma" /><small id="usernamePreview" class="muted">Profile link me username dikhega.</small></label>
           <label>Role / Kaam *<input name="role" required placeholder="e.g. Web Developer" maxlength="80" /></label>
           <label>Location<input name="location" placeholder="e.g. Jaipur, India" maxlength="60" /></label>
           <label>Photo (optional)<input type="file" name="photo" accept="image/*" /></label>

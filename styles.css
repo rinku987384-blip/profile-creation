@@ -1,4 +1,5 @@
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:#0b1020;color:#e8ecf6}
+[hidden]{display:none!important}
 a{color:inherit}.wrap{max-width:1020px;margin:0 auto;padding:0 18px}
 .nav{position:sticky;top:0;background:rgba(11,16,32,.9);backdrop-filter:blur(8px);border-bottom:1px solid #26314f;z-index:10}
 .nav-in{display:flex;justify-content:space-between;align-items:center;height:60px}
@@ -15,6 +16,12 @@ h1{font-size:42px;line-height:1.1;margin:0 0 12px}.hl{color:#7c9cff}
 .avatar,.avatar-img{width:84px;height:84px;border-radius:50%;margin:40px auto 8px;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800;background:#243056;border:3px solid #0b1020;position:relative;object-fit:cover}
 .avatar-img{padding:0}.role{color:#9fb0d4;margin:4px 0}.bio{color:#cdd6ee;font-size:14px}
 .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0}.chips span{background:#1e2a52;border:1px solid #33406a;padding:4px 10px;border-radius:20px;font-size:12px}
+.username{display:block;color:#9fb0d4;font-size:13px;font-weight:600;margin:4px 0}
+.shared-profile{max-width:620px;margin:36px auto;text-align:center;position:relative;overflow:hidden;padding:28px}
+.shared-profile-card{position:relative}
+.shared-profile-card .pc-head{left:-28px;right:-28px}
+.shared-profile-card h1{position:relative;font-size:32px;margin:8px 0}
+.shared-profile-card .avatar,.shared-profile-card .avatar-img{position:relative}
 .card{background:#101736;border:1px solid #26314f;border-radius:16px;padding:24px;margin:18px 0}
 .muted{color:#9fb0d4}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 form label{display:block;font-size:14px;margin:10px 0;color:#cdd6ee}form input,form textarea{width:100%;margin-top:6px;padding:10px 12px;border-radius:10px;border:1px solid #33406a;background:#0b1330;color:#fff}
