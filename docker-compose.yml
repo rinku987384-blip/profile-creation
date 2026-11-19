@@ -1,0 +1,11 @@
+services:
+  mongodb:
+    image: mongo:7
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - profilehub_mongo_data:/data/db
+
+volumes:
+  profilehub_mongo_data:
